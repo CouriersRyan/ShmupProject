@@ -86,4 +86,9 @@ public class PhysicsManager : MonoBehaviour
 
         return dstSq <= radiiSq;
     }
+
+    public bool AddPhysicsBody(PhysicsBody pb)
+    {
+        return collidables.Add(pb);
+    }
 }

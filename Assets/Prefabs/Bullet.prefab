@@ -116,8 +116,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cde3899375ad98140a0115e13bd14d85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 0.1
   isActivelyChecking: 0
-  isBoundToCamera: 1
+  contactLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  isBoundToCameraEdge: 1
   edgeBehavior: 1
-  radius: 1
   edgeCorrection: 0

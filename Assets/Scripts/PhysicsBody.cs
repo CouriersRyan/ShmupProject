@@ -42,10 +42,18 @@ public class PhysicsBody : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         cam = Camera.main;
+
+        // For now, only check active checkers against non-active checkers, in the future make so that actice can check against active.
+        if (!isActivelyChecking)
+        {
+            PhysicsManager.Instance.AddPhysicsBody(this);
+        }
     }
 
     private void Update()
     {
+        // Check for collisions if it is an body that wants to actively check.
+        // This is done to prevent potentially O(n^2) checks.
         if (isActivelyChecking)
         {
             PhysicsManager.Instance.CheckCollisions(this);
@@ -75,7 +83,7 @@ public class PhysicsBody : MonoBehaviour
     void FixedUpdate()
     {
         // Update position with queued movement
-        transform.position += movement;
+        transform.position += transform.rotation * movement;
         if (isBoundToCameraEdge)
         {
             if (edgeBehavior == EdgeBehavior.Stop)
