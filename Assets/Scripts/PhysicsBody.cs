@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -77,7 +78,15 @@ public class PhysicsBody : MonoBehaviour
     {
         // Update position with queued movement
         position += movement;
-        BoundOnEdge();
+        if (edgeBehavior == EdgeBehavior.Stop)
+        {
+            BoundOnEdge();
+        }
+        else
+        {
+            DestroyOnEdge();
+        }
+        
 
         transform.position = position;
 
@@ -165,6 +174,7 @@ public class PhysicsBody : MonoBehaviour
         if (hitEdge)
         {
             // Destroy/Pool
+            throw new NotImplementedException();
         }
     }
 }

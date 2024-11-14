@@ -68,7 +68,7 @@ public class PlayerController : Entity
 
     private void OnBombPerformed(InputAction.CallbackContext context)
     {
-        
+        // TODO: Screen Clear
     }
 
     public override void DealDamage(int damage)
