@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Bullet : PoolableObject
@@ -10,6 +11,17 @@ public class Bullet : PoolableObject
     public Affiliation affiliation;
 
     [SerializeField] private PhysicsBody pb;
+
+    private void Start()
+    {
+        pb.DestroyRecycle += OnDestroyRecycle;
+    }
+
+    private void OnDestroy()
+    {
+        pb.DestroyRecycle -= OnDestroyRecycle;
+    }
+
     private void Update()
     {
         pb.MovePosition(Vector2.up * (speed * Time.deltaTime));
@@ -34,7 +46,13 @@ public class Bullet : PoolableObject
     {
         owner = null;
     }
+
+    private void OnDestroyRecycle(object sender, EventArgs e)
+    {
+        pool.Recycle(this);
+    }
 }
+
 
 public enum Affiliation
 {

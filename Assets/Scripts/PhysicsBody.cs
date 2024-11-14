@@ -7,32 +7,31 @@ using UnityEngine;
 public class PhysicsBody : MonoBehaviour
 {
     [Header("Body")]
-    private Vector3 position;
-
     private Vector3 movement; // Amount of movement for current frame.
-
-    public Vector3 Position
-    {
-        get => position;
-    }
-    
-    [SerializeField] private bool isActivelyChecking = false;
-    [SerializeField] private bool isBoundToCamera = true;
-    [SerializeField] private EdgeBehavior edgeBehavior = EdgeBehavior.Stop;
 
     private SpriteRenderer spriteRenderer;
 
     [SerializeField] private float radius = 1f;
+
+    [Header("Collisions")]
+    [SerializeField] private bool isActivelyChecking = false;
+    [SerializeField] private LayerMask contactLayers;
+
+    [SerializeField] private bool isBoundToCameraEdge = true;
+    [SerializeField] private EdgeBehavior edgeBehavior = EdgeBehavior.Stop;
     // Amount to adjust the edge calculations by,
     // positive to expand the camera edges and negative to shrink it
     [SerializeField] private float edgeCorrection;
     
     private Camera cam;
-    
+
+    public event EventHandler DestroyRecycle;
+
     public Vector2 Center
     {
         get { return spriteRenderer.bounds.center; }
     }
+
     public float Radius { get => radius; }
     public Color SpriteColor
     {
@@ -43,7 +42,6 @@ public class PhysicsBody : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         cam = Camera.main;
-        position = transform.position;
     }
 
     private void Update()
@@ -77,19 +75,19 @@ public class PhysicsBody : MonoBehaviour
     void FixedUpdate()
     {
         // Update position with queued movement
-        position += movement;
-        if (edgeBehavior == EdgeBehavior.Stop)
+        transform.position += movement;
+        if (isBoundToCameraEdge)
         {
-            BoundOnEdge();
-        }
-        else
-        {
-            DestroyOnEdge();
+            if (edgeBehavior == EdgeBehavior.Stop)
+            {
+                BoundOnEdge();
+            }
+            else
+            {
+                DestroyOnEdge();
+            }
         }
         
-
-        transform.position = position;
-
         movement = Vector3.zero;
     }
 
@@ -104,7 +102,7 @@ public class PhysicsBody : MonoBehaviour
     /// </summary>
     private void BoundOnEdge()
     {
-        Vector3 screenPos = cam.WorldToScreenPoint(position);
+        Vector3 screenPos = cam.WorldToScreenPoint(transform.position);
         bool onEdge = false;
 
         // Check x-edges
@@ -134,7 +132,7 @@ public class PhysicsBody : MonoBehaviour
         // Apply positional changes if the object did stop.
         if (onEdge)
         {
-            position = cam.ScreenToWorldPoint(screenPos);
+            transform.position = cam.ScreenToWorldPoint(screenPos);
         }
     }
     
@@ -143,7 +141,7 @@ public class PhysicsBody : MonoBehaviour
     /// </summary>
     private void DestroyOnEdge()
     {
-        Vector3 screenPos = cam.WorldToScreenPoint(position);
+        Vector3 screenPos = cam.WorldToScreenPoint(transform.position);
         bool hitEdge = false;
 
         // Check x-edges
@@ -174,7 +172,7 @@ public class PhysicsBody : MonoBehaviour
         if (hitEdge)
         {
             // Destroy/Pool
-            throw new NotImplementedException();
+            DestroyRecycle?.Invoke(this, new EventArgs());
         }
     }
 }

@@ -20,7 +20,7 @@ public class PhysicsManager : MonoBehaviour
         }
     }
 
-    [SerializeField] private PhysicsBody[] collidables;
+    private HashSet<PhysicsBody> collidables = new HashSet<PhysicsBody>();
 
     private void Awake()
     {
