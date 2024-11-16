@@ -73,7 +73,7 @@ public class PlayerController : Entity
 
     public override void DealDamage(int damage)
     {
-        health--;
+        currHealth--;
     }
 
     public override void DealDamage(DamageInfo damageInfo)

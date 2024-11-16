@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 
+public delegate void CollisionHandler(PhysicsBody other);
+
 /// <summary>
 /// Class that represents physical calculations for gameObjects such as movement and collisions
 /// </summary>
@@ -26,6 +28,7 @@ public class PhysicsBody : MonoBehaviour
     private Camera cam;
 
     public event EventHandler DestroyRecycle;
+    public event CollisionHandler Collision;
 
     public Vector2 Center
     {
@@ -68,6 +71,7 @@ public class PhysicsBody : MonoBehaviour
     public void OnCollide(PhysicsBody other)
     {
         spriteRenderer.color = Color.red;
+        Collision?.Invoke(other);
     }
     
     /// <summary>

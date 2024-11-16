@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,23 @@ using UnityEngine;
 /// <summary>
 /// An entity is anything that has HP among other stats
 /// </summary>
-public abstract class Entity : MonoBehaviour, IHealth
+public abstract class Entity : PoolableObject, IHealth
 {
     [SerializeField] protected int health = 1;
-    public int Health { get => health; }
+    [SerializeField] protected int currHealth;
+
+    void Start()
+    {
+        currHealth = health;
+    }
+
+    public int Health { get => currHealth; }
     public abstract void DealDamage(int damage);
 
     public abstract void DealDamage(DamageInfo damageInfo);
+    
+    public override void OnRecycle()
+    {
+        currHealth = health;
+    }
 }

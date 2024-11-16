@@ -15,11 +15,13 @@ public class Bullet : PoolableObject
     private void Start()
     {
         pb.DestroyRecycle += OnDestroyRecycle;
+        pb.Collision += OnCollision;
     }
 
     private void OnDestroy()
     {
         pb.DestroyRecycle -= OnDestroyRecycle;
+        pb.Collision -= OnCollision;
     }
 
     private void Update()
@@ -27,7 +29,7 @@ public class Bullet : PoolableObject
         pb.MovePosition(Vector2.up * (speed * Time.deltaTime));
     }
 
-    private void OnCollision(Collision2D other)
+    private void OnCollision(PhysicsBody other)
     {
         if (other.gameObject.tag.Equals("BulletBound"))
         {

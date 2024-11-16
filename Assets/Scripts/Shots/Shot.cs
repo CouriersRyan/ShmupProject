@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Pool;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Shot : MonoBehaviour, IShot
 {
@@ -12,40 +13,40 @@ public class Shot : MonoBehaviour, IShot
     
     public List<ShotMod> Mods { get; set; }
     
-    private GameObjectPool _bulletPool;
-    [SerializeField] private float _timer;
-    private float _shotInterval;
+    private GameObjectPool bulletPool;
+    [SerializeField] private float timer;
+    private float shotInterval;
 
     private void Start()
     {
         if (GameObjectPool.Pools.ContainsKey(bullet.name))
         {
-            _bulletPool = GameObjectPool.Pools[bullet.name];
+            bulletPool = GameObjectPool.Pools[bullet.name];
         }
         else
         {
-            _bulletPool = GameObjectPool.Create(bullet, 50, 150);
+            bulletPool = GameObjectPool.Create(bullet, 50, 150);
         }
 
-        _timer = 0;
-        _shotInterval = 1f / shotRate;
+        timer = 0;
+        shotInterval = 1f / shotRate;
     }
 
     public virtual void Shooting(Vector2 dir)
     {
-        _timer += Time.deltaTime;
-        while (_timer > _shotInterval)
+        timer += Time.deltaTime;
+        while (timer > shotInterval)
         {
-            _timer -= _shotInterval;
-            var newBullet = _bulletPool.Allocate();
+            timer -= shotInterval;
+            var newBullet = bulletPool.Allocate();
             newBullet.transform.position = transform.position;
-            var bullet = (newBullet as Bullet);
-            bullet.dir = dir;
-            bullet.affiliation = affiliation;
-            bullet.owner = this;
+            var newBullet1 = (newBullet as Bullet);
+            newBullet1.dir = dir;
+            newBullet1.affiliation = affiliation;
+            newBullet1.owner = this;
             float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
             Quaternion rotation = Quaternion.AngleAxis(angle, -Vector3.forward);
-            bullet.transform.rotation = rotation;
+            newBullet1.transform.rotation = rotation;
         }
     }
 }
