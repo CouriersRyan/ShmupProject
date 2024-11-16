@@ -33,9 +33,10 @@ public class PhysicsBody : MonoBehaviour
     }
 
     public float Radius { get => radius; }
-    public Color SpriteColor
+
+    public LayerMask ContactLayers
     {
-        set { spriteRenderer.color = value; }
+        get => contactLayers;
     }
 
     private void Start()
@@ -66,7 +67,7 @@ public class PhysicsBody : MonoBehaviour
     /// <param name="info"></param>
     public void OnCollide(PhysicsBody other)
     {
-        this.SpriteColor = Color.red;
+        spriteRenderer.color = Color.red;
     }
     
     /// <summary>
@@ -74,7 +75,7 @@ public class PhysicsBody : MonoBehaviour
     /// </summary>
     public void ResetCollide()
     {
-        this.SpriteColor = Color.white;
+        spriteRenderer.color = Color.white;
     }
 
     /// <summary>

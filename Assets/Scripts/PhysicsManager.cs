@@ -62,7 +62,7 @@ public class PhysicsManager : MonoBehaviour
     {
         // Check collisions
         bool collision = false;
-        collision = CircleCollision(body1, body2);
+        collision = CircleCollision(body1, body2, true);
 
         // If any collision occured, run each colliding object's onCollide script.
         if (collision) {
@@ -74,13 +74,18 @@ public class PhysicsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Check collision between two sprites using Circle collision checking
+    /// Check collision between two sprites using Circle collision checking.
+    /// If checkLayers is enabled, then using body1's layerMask, check if this collision is even allowed.
     /// </summary>
     /// <param name="body1"></param>
     /// <param name="body2"></param>
     /// <returns></returns>
-    private bool CircleCollision(PhysicsBody body1, PhysicsBody body2)
+    private bool CircleCollision(PhysicsBody body1, PhysicsBody body2, bool checkLayers = false)
     {
+        if (checkLayers && (body1.ContactLayers & (1 << body2.gameObject.layer)) == 0)
+        {
+            return false;
+        }
         float dstSq = (body1.Center - body2.Center).sqrMagnitude;
         float radiiSq = Mathf.Pow(body1.Radius + body2.Radius, 2);
 
