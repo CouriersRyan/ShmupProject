@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 1937047535547288403, guid: 90510fccff0f9cc409eb112140918934, type: 3}
-  shotRate: 60
+  shotRate: 45
   affiliation: 0
-  _timer: 0
+  timer: 0
 --- !u!1 &5365331966816948603
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,9 +93,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 2079677343723522813, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
-  shotRate: 60
+  shotRate: 30
   affiliation: 0
-  _timer: 0
+  timer: 0
 --- !u!1 &5693175664044151909
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,8 +173,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_SortingOrder: 5
+  m_Sprite: {fileID: 21300000, guid: 1031cb0ef1a82954fbb8506e63cd4acd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -197,7 +197,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca9314e02abd01a42a30034ee57d1dfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pool: {fileID: 0}
   health: 3
+  currHealth: 0
   playerInput: {fileID: 0}
 --- !u!114 &3053200036406734863
 MonoBehaviour:

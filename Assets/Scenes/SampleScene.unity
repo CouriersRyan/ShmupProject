@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 827170705}
   - component: {fileID: 827170704}
   m_Layer: 6
-  m_Name: Hexagon Flat-Top
+  m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -547,6 +547,10 @@ PrefabInstance:
     - target: {fileID: 6727002423088008691, guid: 627086be35dccfa44900bbc6372da667, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8671298017135610120, guid: 627086be35dccfa44900bbc6372da667, type: 3}
+      propertyPath: shotRate
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
