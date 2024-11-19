@@ -1,13 +1,16 @@
 ﻿# Game Project: 206 Shmup Project
 ### Creator: Ryan Zhang
-### Version: 1.0
-### Date: 11/5/2024
+### Version: 1.1
+### Date: 11/19/2024
 
 
 ## New features
-- Created Repository
-- Created Github Pages Build
-- 
+- Created custom physics system
+- Created player input and movement logic.
+- Player and enemies take damage.
+- Player and enemies shoot bullets.
+- Handled logic when objects hit the camera edge.
+
 ## Fixes
 - None
 
