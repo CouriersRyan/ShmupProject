@@ -1,8 +1,12 @@
 using UnityEngine;
 
+/// <summary>
+/// Class that handles character movement logic and shooting.
+/// </summary>
 [RequireComponent(typeof(PhysicsBody))]
 public class MovementController : MonoBehaviour
 {
+    // fields
     [SerializeField] private float focusedSpeed = 5f;
     [SerializeField] private float unfocusedSpeed = 10f;
     private float speed;
@@ -16,7 +20,8 @@ public class MovementController : MonoBehaviour
     
     [SerializeField] private Shot _focusedShot;
     [SerializeField] private Shot _unfocusedshot;
-
+    
+    // properties
     public bool Focus
     {
         get => _focused;
@@ -46,6 +51,8 @@ public class MovementController : MonoBehaviour
         set => _isShooting = value;
     }
 
+    
+    //methods
     void Start()
     {
         if (_unfocusedshot == null) _unfocusedshot = GetComponent<Shot>();

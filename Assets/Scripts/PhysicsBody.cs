@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+// delegate for collision events
 public delegate void CollisionHandler(PhysicsBody other);
 
 /// <summary>
@@ -8,6 +9,7 @@ public delegate void CollisionHandler(PhysicsBody other);
 /// </summary>
 public class PhysicsBody : MonoBehaviour
 {
+    // fields
     [Header("Body")]
     private Vector3 movement; // Amount of movement for current frame.
 
@@ -30,6 +32,7 @@ public class PhysicsBody : MonoBehaviour
     public event EventHandler DestroyRecycle;
     public event CollisionHandler Collision;
 
+    // properties
     public Vector2 Center
     {
         get { return spriteRenderer.bounds.center; }
@@ -42,6 +45,8 @@ public class PhysicsBody : MonoBehaviour
         get => contactLayers;
     }
 
+    
+    // methods
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -104,7 +109,10 @@ public class PhysicsBody : MonoBehaviour
         movement = Vector3.zero;
     }
 
-    
+    /// <summary>
+    /// Adds movement to the total movement vector for the frame, to be resolved.
+    /// </summary>
+    /// <param name="movement"></param>
     public void MovePosition(Vector3 movement)
     {
         this.movement += movement;
@@ -181,7 +189,7 @@ public class PhysicsBody : MonoBehaviour
             hitEdge = true;
         }
 
-        // Apply positional changes if the object did hit the edge.
+        // Destroy if edge was hit.
         if (hitEdge)
         {
             // Destroy/Pool
@@ -190,6 +198,9 @@ public class PhysicsBody : MonoBehaviour
     }
 }
 
+/// <summary>
+/// Enum to handle PhysicsBody's behavior when colliding with the screen edge.
+/// </summary>
 public enum EdgeBehavior
 {
     Stop,

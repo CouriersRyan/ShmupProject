@@ -1,17 +1,24 @@
 using System;
+using Pool;
 using UnityEngine;
 
+/// <summary>
+/// Represents a bullet that is shot and can deal dmaage.
+/// </summary>
 public class Bullet : PoolableObject
 {
+    // fields
     public float speed = 20f;
 
     public Vector2 dir;
 
-    public Shot owner;
-    public Affiliation affiliation;
+    public Shot owner; // the Shot the shoots the bullet
+    public Affiliation affiliation; // Enemy or Player
 
     [SerializeField] private PhysicsBody pb;
 
+    
+    // methods
     private void Start()
     {
         pb.DestroyRecycle += OnDestroyRecycle;
@@ -29,13 +36,13 @@ public class Bullet : PoolableObject
         pb.MovePosition(Vector2.up * (speed * Time.deltaTime));
     }
 
+    /// <summary>
+    /// Resolves collisions against other PhysicsBodies.
+    /// </summary>
+    /// <param name="other"></param>
     private void OnCollision(PhysicsBody other)
     {
-        if (other.gameObject.tag.Equals("BulletBound"))
-        {
-            pool.Recycle(this);
-        }
-
+        // If enemy bullet hits the player, or player bullets hits an enemy, deal damage.
         if ((affiliation == Affiliation.Player && other.gameObject.CompareTag("Enemy")) ||
             affiliation == Affiliation.Enemy && other.gameObject.CompareTag("Player"))
         {
@@ -55,7 +62,9 @@ public class Bullet : PoolableObject
     }
 }
 
-
+/// <summary>
+/// Enum represents what affiliation the bullet has, being either shot by the player or the enemies.
+/// </summary>
 public enum Affiliation
 {
     Player,

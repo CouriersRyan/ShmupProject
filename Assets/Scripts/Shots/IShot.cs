@@ -7,11 +7,18 @@ using UnityEngine;
 /// </summary>
 public interface IShot
 {
+    /// <summary>
+    /// List of modifiers that can change the behavior of the shot.
+    /// </summary>
     public List<ShotMod> Mods
     {
         get;
         set;
     }
     
+    /// <summary>
+    /// Tells component to start handling shooting.
+    /// </summary>
+    /// <param name="dir"></param>
     public void Shooting(Vector2 dir);
 }

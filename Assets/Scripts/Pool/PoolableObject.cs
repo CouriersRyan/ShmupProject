@@ -1,12 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Pool;
 using UnityEngine;
 
-public class PoolableObject : MonoBehaviour
+namespace Pool
 {
-    public GameObjectPool pool;
+    /// <summary>
+    /// Represents a game object that can be pooled.
+    /// </summary>
+    public class PoolableObject : MonoBehaviour
+    {
+        // reference to the pool
+        public GameObjectPool pool;
 
-    public virtual void OnRecycle(){}
+        // Logic called when object is recycled.
+        public virtual void OnRecycle(){}
+    }
 }

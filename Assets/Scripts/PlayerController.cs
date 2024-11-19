@@ -1,8 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Class that represents the Player character. Sends and receives data and events relevant to the player
+/// with other components.
+/// </summary>
 public class PlayerController : Entity
 {
+    // fields
     [SerializeField] private PlayerInput playerInput;
     private InputAction _playerMove;
     private InputAction _playerShoot;
@@ -11,18 +16,20 @@ public class PlayerController : Entity
 
     private MovementController _movementController;
 
+    // properties
     public static PlayerController Player
     {
         get;
         private set;
     }
     
-    // Start is called before the first frame update
+    // methods
     void Start()
     {
+        // static reference to the player
         Player = this;
-        _movementController = GetComponent<MovementController>();
         
+        _movementController = GetComponent<MovementController>();
         playerInput.SwitchCurrentActionMap("PlayableCharacter");
         
         // Bind Functions to Action Map
@@ -71,11 +78,22 @@ public class PlayerController : Entity
         // TODO: Screen Clear
     }
 
+    
+    /// <summary>
+    /// Deal damage to the player.
+    /// </summary>
+    /// <param name="damage"></param>
     public override void DealDamage(int damage)
     {
         currHealth--;
     }
 
+    
+    /// <summary>
+    /// Apply damage with secondary effects to the player.
+    /// </summary>
+    /// <param name="damageInfo"></param>
+    /// <exception cref="NotImplementedException"></exception>
     public override void DealDamage(DamageInfo damageInfo)
     {
         throw new System.NotImplementedException();
