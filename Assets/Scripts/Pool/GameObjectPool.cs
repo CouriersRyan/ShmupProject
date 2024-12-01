@@ -96,15 +96,15 @@ namespace Pool
             if (_poolState == State.Initialized)
                 return false;
             
-            name = "Object Pool: " + prefab.name;
-            if (Pools.ContainsKey(name))
+            name = "Object Pool: " + prefab.poolID;
+            if (Pools.ContainsKey(prefab.poolID))
             {
                 //gameObject.SetActive(false);
                 Destroy(gameObject);
             }
             else
             {
-                Pools[name] = this;
+                Pools[prefab.poolID] = this;
             }
             
             if (initPoolSize > maxPoolSize || maxPoolSize <= 0)

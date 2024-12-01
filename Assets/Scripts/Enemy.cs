@@ -14,22 +14,27 @@ public class Enemy : Entity
     
     [SerializeField] private PhysicsBody pb;
 
-    private GameObjectPool enemyPool;
+    //private GameObjectPool enemyPool;
     
     // methods
     private void Start()
+    {
+        Init();
+    }
+
+    public void Init()
     {
         shot = GetComponent<Shot>();
         pb.DestroyRecycle += OnDestroyRecycle;
         
         // enemies are poolable objects, so create a pool if one isn't made.
-        if (GameObjectPool.Pools.ContainsKey(this.name))
+        if (GameObjectPool.Pools.ContainsKey(poolID))
         {
-            enemyPool = GameObjectPool.Pools[this.name];
+            pool = GameObjectPool.Pools[poolID];
         }
         else
         {
-            enemyPool = GameObjectPool.Create(this, 10, 30);
+            pool = GameObjectPool.Create(this, 10, 30);
         }
     }
     
@@ -54,7 +59,7 @@ public class Enemy : Entity
         currHealth -= damage;
         if (currHealth <= 0)
         {
-            enemyPool.Recycle(this);
+            pool.Recycle(this);
         }
     }
 
@@ -76,5 +81,10 @@ public class Enemy : Entity
     private void OnDestroyRecycle(object sender, EventArgs e)
     {
         pool.Recycle(this);
+    }
+
+    public bool KillEnemy()
+    {
+        return pool.Recycle(this);
     }
 }

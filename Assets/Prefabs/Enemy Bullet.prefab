@@ -13,6 +13,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2079677343723522813, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
+      propertyPath: poolID
+      value: EnemyBullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079677343723522813, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
       propertyPath: affiliation
       value: 1
       objectReference: {fileID: 0}
@@ -30,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2852462600406271597, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
       propertyPath: m_Name
-      value: Bullet Variant
+      value: Enemy Bullet
       objectReference: {fileID: 0}
     - target: {fileID: 2852462600406271597, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
       propertyPath: m_Layer

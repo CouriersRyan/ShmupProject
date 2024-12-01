@@ -198,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pool: {fileID: 0}
+  poolID: Player
   health: 3
   currHealth: 0
   playerInput: {fileID: 0}

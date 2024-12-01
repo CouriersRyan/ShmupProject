@@ -21,9 +21,9 @@ public class Shot : MonoBehaviour, IShot
     // methods
     private void Start()
     {
-        if (GameObjectPool.Pools.ContainsKey(bullet.name))
+        if (GameObjectPool.Pools.ContainsKey(bullet.poolID))
         {
-            bulletPool = GameObjectPool.Pools[bullet.name];
+            bulletPool = GameObjectPool.Pools[bullet.poolID];
         }
         else
         {

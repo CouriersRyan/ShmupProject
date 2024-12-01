@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2079677343723522813, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
+      propertyPath: poolID
+      value: PlayerBullet0
+      objectReference: {fileID: 0}
     - target: {fileID: 2496832710399761608, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
       propertyPath: m_Sprite
       value: 
