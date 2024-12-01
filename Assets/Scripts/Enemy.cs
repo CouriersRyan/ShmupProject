@@ -13,6 +13,7 @@ public class Enemy : Entity
     private Shot shot;
     
     [SerializeField] private PhysicsBody pb;
+    [SerializeField] private float speed = 2f;
 
     //private GameObjectPool enemyPool;
     
@@ -48,6 +49,7 @@ public class Enemy : Entity
     {
         // shoot at the player
         shot.Shooting(PlayerController.Player.transform.position - transform.position);
+        pb.MovePosition(new Vector2(0, -speed * Time.deltaTime));
     }
 
     /// <summary>

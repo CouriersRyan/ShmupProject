@@ -9,6 +9,8 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private Enemy[] enemies;
     [SerializeField] private float spawnInterval;
+
+    private const float Bounds = 8.5f;
     
     // Start is called before the first frame update
     void Start()
@@ -35,7 +37,8 @@ public class EnemyManager : MonoBehaviour
         while (true)
         {
             Enemy chosenEnemy = enemies[Random.Range(0, enemies.Length)];
-            GameObjectPool.Pools[chosenEnemy.poolID].Allocate();
+            PoolableObject newEnemy = GameObjectPool.Pools[chosenEnemy.poolID].Allocate();
+            newEnemy.transform.position = new Vector2(Random.Range(-Bounds, Bounds), 4);
             yield return new WaitForSeconds(spawnInterval);
         }
     }
