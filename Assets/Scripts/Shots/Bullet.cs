@@ -5,20 +5,25 @@ using UnityEngine;
 /// <summary>
 /// Represents a bullet that is shot and can deal dmaage.
 /// </summary>
-public class Bullet : PoolableObject
+public class Bullet : Agent
 {
     // fields
     public float speed = 20f;
 
-    public Vector2 dir;
+    public Vector2 Direction
+    {
+        get => pb.Direction;
+        set => pb.Direction = value;
+    }
 
     public Shot owner; // the Shot the shoots the bullet
     public Affiliation affiliation; // Enemy or Player
 
-    [SerializeField] private PhysicsBody pb;
+    public PhysicsBody target;
 
     
     // methods
+
     private void Start()
     {
         pb.DestroyRecycle += OnDestroyRecycle;
@@ -30,8 +35,8 @@ public class Bullet : PoolableObject
         pb.DestroyRecycle -= OnDestroyRecycle;
         pb.Collision -= OnCollision;
     }
-
-    private void Update()
+    
+    protected override void CalcSteeringForce()
     {
         pb.MovePosition(Vector2.up * (speed * Time.deltaTime));
     }

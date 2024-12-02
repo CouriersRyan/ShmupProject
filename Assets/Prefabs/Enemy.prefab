@@ -104,6 +104,7 @@ MonoBehaviour:
   health: 1
   currHealth: 0
   pb: {fileID: 2835010078283215081}
+  speed: 2
 --- !u!114 &6098110230868180378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +133,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cde3899375ad98140a0115e13bd14d85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 1
   radius: 0.45
+  mass: 1
+  maxSpeed: 500
+  maxForce: 50
   isActivelyChecking: 1
   contactLayers:
     serializedVersion: 2

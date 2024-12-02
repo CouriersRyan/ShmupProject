@@ -361,14 +361,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6347818688149481574, guid: 627086be35dccfa44900bbc6372da667, type: 3}
-      propertyPath: radius
-      value: 0.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 6347818688149481574, guid: 627086be35dccfa44900bbc6372da667, type: 3}
-      propertyPath: edgeCorrection
-      value: -10
-      objectReference: {fileID: 0}
     - target: {fileID: 6727002423088008691, guid: 627086be35dccfa44900bbc6372da667, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -409,6 +401,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8671298017135610120, guid: 627086be35dccfa44900bbc6372da667, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 2662517813035586324, guid: 90510fccff0f9cc409eb112140918934, type: 3}
     - target: {fileID: 8671298017135610120, guid: 627086be35dccfa44900bbc6372da667, type: 3}
       propertyPath: shotRate
       value: 20

@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7148225334077978842, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
+      propertyPath: type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7148225334077978842, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
+      propertyPath: maxForce
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: -7148225334077978842, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
+      propertyPath: contactLayers.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 2079677343723522813, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
       propertyPath: poolID
       value: PlayerBullet0
@@ -30,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2852462600406271597, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
       propertyPath: m_Name
-      value: Test Bullet Variant
+      value: Homing Bullet
       objectReference: {fileID: 0}
     - target: {fileID: 2852462600406271597, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
       propertyPath: m_Layer
@@ -76,8 +88,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2079677343723522813, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2852462600406271597, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 2662517813035586324}
   m_SourcePrefab: {fileID: 100100000, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
+--- !u!114 &1941578176577898120 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -7148225334077978842, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
+  m_PrefabInstance: {fileID: 449720042494755246}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2425261386755704771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cde3899375ad98140a0115e13bd14d85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &2425261386755704771 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2852462600406271597, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
+  m_PrefabInstance: {fileID: 449720042494755246}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2662517813035586324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2425261386755704771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55a31eee9d047b847a404325692058d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pool: {fileID: 0}
+  poolID: PlayerBulletHoming
+  pb: {fileID: 1941578176577898120}
+  boundsScalar: 2
+  speed: 20
+  owner: {fileID: 0}
+  affiliation: 0
+  target: {fileID: 0}
+  searchRange: 10

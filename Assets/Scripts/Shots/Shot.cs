@@ -47,7 +47,7 @@ public class Shot : MonoBehaviour, IShot
             var newBullet = bulletPool.Allocate();
             newBullet.transform.position = transform.position;
             var newBullet1 = (newBullet as Bullet);
-            newBullet1.dir = dir;
+            newBullet1.Direction = dir;
             newBullet1.affiliation = affiliation;
             newBullet1.owner = this;
             float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;

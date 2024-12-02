@@ -10,12 +10,21 @@ public delegate void CollisionHandler(PhysicsBody other);
 public class PhysicsBody : MonoBehaviour
 {
     // fields
+    [SerializeField] private PhysicsType type = PhysicsType.Dynamic;
+    
     [Header("Body")]
     private Vector3 movement; // Amount of movement for current frame.
 
     private SpriteRenderer spriteRenderer;
 
     [SerializeField] private float radius = 1f;
+    private Vector3 position;
+    private Vector3 direction;
+    private Vector3 velocity;
+    private Vector3 acceleration;
+    [SerializeField] private float mass = 1;
+    [SerializeField] private float maxSpeed = 500f;
+    [SerializeField] private float maxForce = 50f;
 
     [Header("Collisions")]
     [SerializeField] private bool isActivelyChecking = false;
@@ -45,18 +54,47 @@ public class PhysicsBody : MonoBehaviour
         get => contactLayers;
     }
 
+    public Vector3 Position
+    {
+        get => position;
+    }
+
+    public Vector3 Velocity
+    {
+        get => velocity;
+    }
+
+    public float MaxSpeed
+    {
+        get => maxSpeed;
+    }
+
+    public float MaxForce
+    {
+        get => maxForce;
+    }
+
+    public Vector3 Direction
+    {
+        get => direction;
+        set => direction = value;
+    }
     
     // methods
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         cam = Camera.main;
+        
+        DestroyRecycle += OnDestroyRecycle;
 
-        // For now, only check active checkers against non-active checkers, in the future make so that actice can check against active.
-        if (!isActivelyChecking)
-        {
-            PhysicsManager.Instance.AddPhysicsBody(this);
-        }
+        // For now, only check active checkers against non-active checkers, in the future make so that active can check against active.
+        PhysicsManager.Instance.AddPhysicsBody(this);
+    }
+
+    private void OnDestroy()
+    {
+        DestroyRecycle -= OnDestroyRecycle;
     }
 
     private void Update()
@@ -92,8 +130,43 @@ public class PhysicsBody : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
-        // Update position with queued movement
-        transform.position += transform.rotation * movement;
+        position = transform.position;
+
+        if (type == PhysicsType.Dynamic)
+        {
+            // Update velocity
+            velocity += acceleration * Time.deltaTime;
+
+            if(velocity.sqrMagnitude > maxSpeed * maxSpeed)
+            {
+                velocity = velocity.normalized * maxSpeed;
+            }
+            direction = velocity.normalized;
+
+            // Update position
+            position += velocity * Time.deltaTime;
+
+            transform.position = position;
+
+            // Reset Forces
+            acceleration = Vector3.zero;
+            
+            // face movement direction
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, Velocity);
+        }
+        else if (type == PhysicsType.Kinematic)
+        {
+            // Update position with queued movement
+            transform.position += transform.rotation * movement;
+            
+            // face movement direction
+            //transform.rotation = Quaternion.LookRotation(Vector3.forward, movement);
+        
+            movement = Vector3.zero;
+        }
+        
+        
+        
         if (isBoundToCameraEdge)
         {
             if (edgeBehavior == EdgeBehavior.Stop)
@@ -105,8 +178,6 @@ public class PhysicsBody : MonoBehaviour
                 DestroyOnEdge();
             }
         }
-        
-        movement = Vector3.zero;
     }
 
     /// <summary>
@@ -116,6 +187,15 @@ public class PhysicsBody : MonoBehaviour
     public void MovePosition(Vector3 movement)
     {
         this.movement += movement;
+    }
+    
+    /// <summary>
+    /// Applies a generic force represented as a vector.
+    /// </summary>
+    /// <param name="force"></param>
+    public void ApplyForce(Vector3 force)
+    {
+        acceleration += force / mass;
     }
 
     /// <summary>
@@ -196,6 +276,13 @@ public class PhysicsBody : MonoBehaviour
             DestroyRecycle?.Invoke(this, new EventArgs());
         }
     }
+    
+    private void OnDestroyRecycle(object sender, EventArgs e)
+    {
+        acceleration = Vector3.zero;
+        velocity = Vector3.zero;
+        direction = Vector3.up;
+    }
 }
 
 /// <summary>
@@ -205,4 +292,10 @@ public enum EdgeBehavior
 {
     Stop,
     Destroy
+}
+
+public enum PhysicsType
+{
+    Dynamic,
+    Kinematic
 }

@@ -41,7 +41,6 @@ public class PhysicsManager : MonoBehaviour
         body.ResetCollide();
         foreach (PhysicsBody collision in collidables)
         {
-            // TODO: Implement some form of Layer checking to reduce collision checks.
             if (collision.isActiveAndEnabled)
             {
                 collision.ResetCollide();
@@ -53,6 +52,37 @@ public class PhysicsManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Searches for the nearest object in range.
+    /// </summary>
+    /// <param name="range"></param>
+    /// <param name="self"></param>
+    /// <returns></returns>
+    public PhysicsBody SearchForNearest(float range, PhysicsBody self)
+    {
+        PhysicsBody closest = null;
+        foreach (PhysicsBody collision in collidables)
+        {
+            if (collision.isActiveAndEnabled)
+            {
+                bool didCollide = CircleCollision(self, collision, true, range);
+                if (didCollide)
+                {
+                    if (closest == null)
+                    {
+                        closest = collision;
+                    }
+                    else if((self.Center - collision.Center).sqrMagnitude < (self.Center - closest.Center).sqrMagnitude)
+                    {
+                        closest = collision;
+                    }
+                }
+            }
+        }
+
+        return closest;
+    }
+
+    /// <summary>
     /// Perform collisions based on collision mode.
     /// </summary>
     /// <param name="body1"></param>
@@ -60,6 +90,11 @@ public class PhysicsManager : MonoBehaviour
     /// <returns></returns>
     private bool TryCollision(PhysicsBody body1, PhysicsBody body2)
     {
+        if (body1 == body2)
+        {
+            return false;
+        }
+        
         // Check collisions
         bool collision = false;
         collision = CircleCollision(body1, body2, true);
@@ -80,14 +115,14 @@ public class PhysicsManager : MonoBehaviour
     /// <param name="body1"></param>
     /// <param name="body2"></param>
     /// <returns></returns>
-    private bool CircleCollision(PhysicsBody body1, PhysicsBody body2, bool checkLayers = false)
+    private bool CircleCollision(PhysicsBody body1, PhysicsBody body2, bool checkLayers = false, float extraRadius = 0)
     {
         if (checkLayers && (body1.ContactLayers & (1 << body2.gameObject.layer)) == 0)
         {
             return false;
         }
         float dstSq = (body1.Center - body2.Center).sqrMagnitude;
-        float radiiSq = Mathf.Pow(body1.Radius + body2.Radius, 2);
+        float radiiSq = Mathf.Pow(body1.Radius + body2.Radius + extraRadius, 2);
 
         return dstSq <= radiiSq;
     }
