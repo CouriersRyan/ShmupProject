@@ -49,7 +49,7 @@ public abstract class Agent : PoolableObject
         Init();
     }
 
-    void Update()
+    protected virtual void Update()
     {
         ultimaForce = Vector3.zero;
 

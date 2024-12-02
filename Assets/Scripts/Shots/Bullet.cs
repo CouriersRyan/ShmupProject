@@ -9,7 +9,9 @@ public class Bullet : Agent
 {
     // fields
     public float speed = 20f;
-
+    [SerializeField] private bool useLifespan;
+    [SerializeField] private float lifespan;
+    [SerializeField] private float currentLifespan = 0;
     public Vector2 Direction
     {
         get => pb.Direction;
@@ -26,6 +28,8 @@ public class Bullet : Agent
 
     private void Start()
     {
+        currentLifespan = lifespan;
+        
         pb.DestroyRecycle += OnDestroyRecycle;
         pb.Collision += OnCollision;
     }
@@ -39,6 +43,21 @@ public class Bullet : Agent
     protected override void CalcSteeringForce()
     {
         pb.MovePosition(Vector2.up * (speed * Time.deltaTime));
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        if (useLifespan)
+        {
+            currentLifespan -= Time.deltaTime;
+
+            if (currentLifespan <= 0)
+            {
+                pool.Recycle(this);
+            }
+        }
     }
 
     /// <summary>
@@ -58,6 +77,7 @@ public class Bullet : Agent
 
     public override void OnRecycle()
     {
+        currentLifespan = lifespan;
         owner = null;
     }
 

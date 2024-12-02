@@ -129,7 +129,10 @@ MonoBehaviour:
   poolID: PlayerBulletHoming
   pb: {fileID: 1941578176577898120}
   boundsScalar: 2
-  speed: 20
+  speed: 30
+  useLifespan: 0
+  lifespan: 0
+  currentLifespan: 0
   owner: {fileID: 0}
   affiliation: 0
   target: {fileID: 0}
