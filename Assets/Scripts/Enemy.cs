@@ -16,8 +16,9 @@ public class Enemy : Entity
     [SerializeField] private float speed = 2f;
     
     // methods
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         Init();
     }
 

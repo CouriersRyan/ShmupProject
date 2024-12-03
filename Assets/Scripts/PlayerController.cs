@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,6 +16,10 @@ public class PlayerController : Entity
     private InputAction _playerBomb;
 
     private MovementController _movementController;
+    private SpriteRenderer _spriteRenderer;
+
+    private bool isInvincible;
+    [SerializeField] private float invincibilityTime = 1.0f;
 
     // properties
     public static PlayerController Player
@@ -24,13 +29,17 @@ public class PlayerController : Entity
     }
     
     // methods
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
         // static reference to the player
         Player = this;
         
         _movementController = GetComponent<MovementController>();
         playerInput.SwitchCurrentActionMap("PlayableCharacter");
+
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         
         // Bind Functions to Action Map
         _playerMove = playerInput.actions["Move"];
@@ -85,7 +94,11 @@ public class PlayerController : Entity
     /// <param name="damage"></param>
     public override void DealDamage(int damage)
     {
-        currHealth--;
+        if (!isInvincible)
+        {
+            currHealth--;
+            StartCoroutine(DamageGrace());
+        }
     }
 
     
@@ -97,5 +110,29 @@ public class PlayerController : Entity
     public override void DealDamage(DamageInfo damageInfo)
     {
         throw new System.NotImplementedException();
+    }
+
+    /// <summary>
+    ///  Invincibility for a short period after taking damage.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator DamageGrace()
+    {
+        isInvincible = true;
+        float invincibilityLeft = invincibilityTime;
+        while (invincibilityLeft > 0)
+        {
+            // flash the player's sprite while invincible.
+            _spriteRenderer.color = Color.red;
+            yield return new WaitForSeconds(0.1f);
+            _spriteRenderer.color = Color.clear;
+            yield return new WaitForSeconds(0.1f);
+            invincibilityLeft -= 0.2f;
+        }
+
+        // remove player invincibility and also make sprite white again.
+        isInvincible = false;
+        _spriteRenderer.color = Color.white;
+        //StopCoroutine(DamageGrace());
     }
 }

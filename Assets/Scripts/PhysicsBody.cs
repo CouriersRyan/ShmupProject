@@ -113,7 +113,6 @@ public class PhysicsBody : MonoBehaviour
     /// <param name="info"></param>
     public void OnCollide(PhysicsBody other)
     {
-        spriteRenderer.color = Color.red;
         Collision?.Invoke(other);
     }
     
@@ -122,7 +121,6 @@ public class PhysicsBody : MonoBehaviour
     /// </summary>
     public void ResetCollide()
     {
-        spriteRenderer.color = Color.white;
     }
 
     /// <summary>

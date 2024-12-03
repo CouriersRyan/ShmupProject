@@ -16,7 +16,7 @@ public abstract class Entity : PoolableObject, IHealth
     public int Health { get => currHealth; }
     
     // methods
-    void Start()
+    protected virtual void Start()
     {
         currHealth = health;
     }
