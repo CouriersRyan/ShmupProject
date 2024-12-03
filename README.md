@@ -50,7 +50,5 @@ _List any errors, lack of error checking, or specific information that I need to
 _If you did not complete a project requirement, notate that here_
 - Steering Projectiles
 - Player HUD
-- Enemies
-- Camera
 - Game Design
 - Make it your own
