@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Pool;
 using UnityEngine;
@@ -8,19 +9,22 @@ using UnityEngine;
 public class Shot : MonoBehaviour, IShot
 {
     // fields
-    [SerializeField] private Bullet bullet;
-    [SerializeField] private float shotRate = 1; // shots per second
-    [SerializeField] private Affiliation affiliation = Affiliation.Enemy;
+    [SerializeField] protected Bullet bullet;
+    [SerializeField] protected float shotRate = 1; // shots per second
+    [SerializeField] protected Affiliation affiliation = Affiliation.Enemy;
+    [SerializeField] protected float bulletSpeed = 20f;
     
     public List<ShotMod> Mods { get; set; }
     
-    private GameObjectPool bulletPool;
+    protected GameObjectPool bulletPool;
     [SerializeField] private float timer;
     private float shotInterval;
+    [SerializeField] private PhysicsBody pb;
 
     // methods
     private void Start()
     {
+        pb.DestroyRecycle += OnDestroyRecycle;
         if (GameObjectPool.Pools.ContainsKey(bullet.poolID))
         {
             bulletPool = GameObjectPool.Pools[bullet.poolID];
@@ -32,6 +36,12 @@ public class Shot : MonoBehaviour, IShot
 
         timer = 0;
         shotInterval = 1f / shotRate;
+    }
+    
+    private void OnDestroy()
+    {
+        // unsubscribe from events when destroyed.
+        pb.DestroyRecycle -= OnDestroyRecycle;
     }
 
     /// <summary>
@@ -48,11 +58,22 @@ public class Shot : MonoBehaviour, IShot
             newBullet.transform.position = transform.position;
             var newBullet1 = (newBullet as Bullet);
             newBullet1.Direction = dir;
+            newBullet1.speed = bulletSpeed;
             newBullet1.affiliation = affiliation;
             newBullet1.owner = this;
             float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
             Quaternion rotation = Quaternion.AngleAxis(angle, -Vector3.forward);
             newBullet1.transform.rotation = rotation;
         }
+    }
+    
+    /// <summary>
+    /// Called when poolable object needs to be recycled.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected virtual void OnDestroyRecycle(object sender, EventArgs e)
+    {
+        
     }
 }

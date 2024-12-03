@@ -401,14 +401,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8671298017135610120, guid: 627086be35dccfa44900bbc6372da667, type: 3}
-      propertyPath: bullet
-      value: 
-      objectReference: {fileID: 2662517813035586324, guid: 90510fccff0f9cc409eb112140918934, type: 3}
-    - target: {fileID: 8671298017135610120, guid: 627086be35dccfa44900bbc6372da667, type: 3}
-      propertyPath: shotRate
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -522,7 +514,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 8972764952323855570, guid: b8e35fa1ffa705449a9fcfa3899e13b0, type: 3}
+  - {fileID: 1647606213667891086, guid: dcf96f7953881ab4683efcf33393e97e, type: 3}
+  - {fileID: 1647606213667891086, guid: dcf96f7953881ab4683efcf33393e97e, type: 3}
   spawnInterval: 2
 --- !u!4 &1392566038
 Transform:

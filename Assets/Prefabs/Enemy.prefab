@@ -120,7 +120,9 @@ MonoBehaviour:
   bullet: {fileID: 5945533718163990204, guid: 70978497495aa4847bae2916b22650ce, type: 3}
   shotRate: 1
   affiliation: 1
+  bulletSpeed: 20
   timer: 0
+  pb: {fileID: 2835010078283215081}
 --- !u!114 &2835010078283215081
 MonoBehaviour:
   m_ObjectHideFlags: 0

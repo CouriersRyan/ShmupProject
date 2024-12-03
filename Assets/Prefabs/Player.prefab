@@ -44,10 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3102ae45f4e0b794daca3f9106c73f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1937047535547288403, guid: 90510fccff0f9cc409eb112140918934, type: 3}
-  shotRate: 45
+  bullet: {fileID: 2662517813035586324, guid: 90510fccff0f9cc409eb112140918934, type: 3}
+  shotRate: 20
   affiliation: 0
+  bulletSpeed: 20
   timer: 0
+  pb: {fileID: 6347818688149481574}
 --- !u!1 &5365331966816948603
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,7 +97,9 @@ MonoBehaviour:
   bullet: {fileID: 2079677343723522813, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
   shotRate: 30
   affiliation: 0
+  bulletSpeed: 20
   timer: 0
+  pb: {fileID: 6347818688149481574}
 --- !u!1 &5693175664044151909
 GameObject:
   m_ObjectHideFlags: 0
