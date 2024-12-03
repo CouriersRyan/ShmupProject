@@ -11,6 +11,7 @@
 - Added random enemy spawning.
 - Incorporated autonomous agent behaviors for bullets.
 - Added homing bullets for the player's unfocused shot.
+- Player flashes and is invincible for a short time when hit.
 
 ## Fixes
 - Fixed object pooling issues with naming (prefabs and their clones were counted separately previously)
