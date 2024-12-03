@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6362426546626237931, guid: 5d733abbc3a3d9e46bb30418f0cee6b7, type: 3}
+      propertyPath: poolID
+      value: StreamedEnemy
+      objectReference: {fileID: 0}
     - target: {fileID: 8892494695465573166, guid: 5d733abbc3a3d9e46bb30418f0cee6b7, type: 3}
       propertyPath: m_Name
       value: Streamed Enemy

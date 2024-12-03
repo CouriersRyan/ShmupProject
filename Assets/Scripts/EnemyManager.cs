@@ -18,9 +18,14 @@ public class EnemyManager : MonoBehaviour
         // Instantiate all enemies once as well as their pools.
         foreach (var enemy in enemies)
         {
-            var newEnemy = Instantiate(enemy);
-            newEnemy.Init();
-            newEnemy.KillEnemy();
+            // enemies are poolable objects, so create a pool if one isn't made.
+            if (GameObjectPool.Pools.ContainsKey(enemy.poolID))
+            {
+            }
+            else
+            {
+                GameObjectPool.Create(enemy, 10, 30);
+            }
         }
         
         // Begin spawning enemies.
@@ -38,7 +43,7 @@ public class EnemyManager : MonoBehaviour
         {
             Enemy chosenEnemy = enemies[Random.Range(0, enemies.Length)];
             PoolableObject newEnemy = GameObjectPool.Pools[chosenEnemy.poolID].Allocate();
-            newEnemy.transform.position = new Vector2(Random.Range(-Bounds, Bounds), 4);
+            newEnemy.transform.position = new Vector2(Random.Range(-Bounds, Bounds), 5);
             yield return new WaitForSeconds(spawnInterval);
         }
     }

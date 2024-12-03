@@ -24,7 +24,6 @@ public class Shot : MonoBehaviour, IShot
     // methods
     private void Start()
     {
-        pb.DestroyRecycle += OnDestroyRecycle;
         if (GameObjectPool.Pools.ContainsKey(bullet.poolID))
         {
             bulletPool = GameObjectPool.Pools[bullet.poolID];
@@ -36,12 +35,6 @@ public class Shot : MonoBehaviour, IShot
 
         timer = 0;
         shotInterval = 1f / shotRate;
-    }
-    
-    private void OnDestroy()
-    {
-        // unsubscribe from events when destroyed.
-        pb.DestroyRecycle -= OnDestroyRecycle;
     }
 
     /// <summary>
@@ -72,7 +65,7 @@ public class Shot : MonoBehaviour, IShot
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    protected virtual void OnDestroyRecycle(object sender, EventArgs e)
+    public virtual void OnRecycle()
     {
         
     }

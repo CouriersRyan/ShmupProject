@@ -27,16 +27,6 @@ public class Enemy : Entity
     {
         shot = GetComponent<Shot>();
         pb.DestroyRecycle += OnDestroyRecycle;
-        
-        // enemies are poolable objects, so create a pool if one isn't made.
-        if (GameObjectPool.Pools.ContainsKey(poolID))
-        {
-            pool = GameObjectPool.Pools[poolID];
-        }
-        else
-        {
-            pool = GameObjectPool.Create(this, 10, 30);
-        }
     }
     
     private void OnDestroy()
@@ -88,5 +78,11 @@ public class Enemy : Entity
     public bool KillEnemy()
     {
         return pool.Recycle(this);
+    }
+    
+    public override void OnRecycle()
+    {
+        shot.OnRecycle();
+        base.OnRecycle();
     }
 }

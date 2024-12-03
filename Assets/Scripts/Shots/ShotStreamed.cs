@@ -42,7 +42,7 @@ public class ShotStreamed : Shot
         StopCoroutine(StreamedShooting());
     }
     
-    protected override void OnDestroyRecycle(object sender, EventArgs e)
+    public override void OnRecycle()
     {
         triggered = false;
     }
