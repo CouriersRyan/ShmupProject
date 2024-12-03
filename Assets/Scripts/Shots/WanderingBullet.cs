@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Child of Bullet that uses autonomous agent Wandering
+/// </summary>
 public class WanderingBullet : Bullet
 {
     // fields

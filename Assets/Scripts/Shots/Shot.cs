@@ -44,9 +44,12 @@ public class Shot : MonoBehaviour, IShot
     public virtual void Shooting(Vector2 dir)
     {
         timer += Time.deltaTime;
+        // shoot at fixed intervals
         while (timer > shotInterval)
         {
             timer -= shotInterval;
+
+            // get new bullet from pool and set relevant values.
             var newBullet = bulletPool.Allocate();
             newBullet.transform.position = transform.position;
             var newBullet1 = (newBullet as Bullet);

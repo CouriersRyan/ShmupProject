@@ -49,7 +49,10 @@ namespace Pool
             Init(initCount, maxCount);
         }
 
-        // allocate an object from the queue of unused game objects.
+        /// <summary>
+        /// allocate an object from the queue of unused game objects.
+        /// </summary>
+        /// <returns></returns>
         public PoolableObject Allocate()
         {
             if (poolQueue.Count > 0)
@@ -93,25 +96,31 @@ namespace Pool
         /// <returns></returns>
         public bool Init(int initPoolSize, int maxPoolSize)
         {
+            // check if pool already exists
             if (_poolState == State.Initialized)
                 return false;
             
+            // name the pool
             name = "Object Pool: " + prefab.poolID;
+
+            // check again if pool already exists, destroy current pool if so.
             if (Pools.ContainsKey(prefab.poolID))
             {
-                //gameObject.SetActive(false);
                 Destroy(gameObject);
             }
+            // add it to the dictionary otherwise
             else
             {
                 Pools[prefab.poolID] = this;
             }
             
+            // check if parameters are valid
             if (initPoolSize > maxPoolSize || maxPoolSize <= 0)
             {
                 return false;
             }
             
+            // initialize the pool
             maxCount = maxPoolSize;
 
             poolQueue = new Stack<PoolableObject>(maxPoolSize);

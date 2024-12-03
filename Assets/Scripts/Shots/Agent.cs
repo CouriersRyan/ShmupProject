@@ -49,6 +49,7 @@ public abstract class Agent : PoolableObject
         Init();
     }
 
+    // run every frame for every agent.
     protected virtual void Update()
     {
         ultimaForce = Vector3.zero;

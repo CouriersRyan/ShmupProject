@@ -165,8 +165,6 @@ public class PhysicsBody : MonoBehaviour
             movement = Vector3.zero;
         }
         
-        
-        
         if (isBoundToCameraEdge)
         {
             if (edgeBehavior == EdgeBehavior.Stop)
@@ -279,6 +277,7 @@ public class PhysicsBody : MonoBehaviour
     
     private void OnDestroyRecycle(object sender, EventArgs e)
     {
+        // reset values when pooled
         acceleration = Vector3.zero;
         velocity = Vector3.zero;
         direction = Vector3.up;
@@ -294,6 +293,9 @@ public enum EdgeBehavior
     Destroy
 }
 
+/// <summary>
+/// Enum representing whether a physics body is Dynamic (uses forces) or Kinematic (doesn't use forces).
+/// </summary>
 public enum PhysicsType
 {
     Dynamic,

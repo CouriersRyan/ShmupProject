@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Class that handles physics interactions between physics bodies such as collisions.
+/// </summary>
 public class PhysicsManager : MonoBehaviour
 {
     // Singleton

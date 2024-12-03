@@ -5,14 +5,18 @@ using Pool;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// Class in-charge of handling enemy objects such as spawning.
+/// </summary>
 public class EnemyManager : MonoBehaviour
 {
+    // fields
     [SerializeField] private Enemy[] enemies;
     [SerializeField] private float spawnInterval;
 
     private const float Bounds = 8.5f;
     
-    // Start is called before the first frame update
+    // methods
     void Start()
     {
         // Instantiate all enemies once as well as their pools.
@@ -34,9 +38,14 @@ public class EnemyManager : MonoBehaviour
 
     private void OnDestroy()
     {
+
         StopAllCoroutines();
     }
 
+    /// <summary>
+    /// Spawn random enemies from the list at a fixed interval.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator SpawnEnemyOverTime()
     {
         while (true)

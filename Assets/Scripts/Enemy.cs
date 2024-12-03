@@ -14,8 +14,6 @@ public class Enemy : Entity
     
     [SerializeField] private PhysicsBody pb;
     [SerializeField] private float speed = 2f;
-
-    //private GameObjectPool enemyPool;
     
     // methods
     private void Start()
@@ -23,6 +21,9 @@ public class Enemy : Entity
         Init();
     }
 
+    /// <summary>
+    /// Enemy initialization.
+    /// </summary>
     public void Init()
     {
         shot = GetComponent<Shot>();
@@ -37,9 +38,28 @@ public class Enemy : Entity
 
     private void Update()
     {
-        // shoot at the player
+        // shoot at the player and move as the basic behaviors
         shot.Shooting(PlayerController.Player.transform.position - transform.position);
         pb.MovePosition(new Vector2(0, -speed * Time.deltaTime));
+    }
+    
+    /// <summary>
+    /// Called when poolable object needs to be recycled.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void OnDestroyRecycle(object sender, EventArgs e)
+    {
+        pool.Recycle(this);
+    }
+
+    /// <summary>
+    /// Return enemy to its pool when it is killed.
+    /// </summary>
+    /// <returns></returns>
+    public bool KillEnemy()
+    {
+        return pool.Recycle(this);
     }
 
     /// <summary>
@@ -64,24 +84,10 @@ public class Enemy : Entity
     {
         throw new NotImplementedException();
     }
-    
-    /// <summary>
-    /// Called when poolable object needs to be recycled.
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void OnDestroyRecycle(object sender, EventArgs e)
-    {
-        pool.Recycle(this);
-    }
 
-    public bool KillEnemy()
-    {
-        return pool.Recycle(this);
-    }
-    
     public override void OnRecycle()
     {
+        // make sure the Shot is reset as well.
         shot.OnRecycle();
         base.OnRecycle();
     }

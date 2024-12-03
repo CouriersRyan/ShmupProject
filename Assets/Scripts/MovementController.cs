@@ -13,22 +13,22 @@ public class MovementController : MonoBehaviour
     private Vector2 moveVector;
     private readonly Vector2 ShootVector = Vector2.up;
     
-    private bool _isShooting;
-    private bool _focused = false;
+    private bool isShooting;
+    private bool focused = false;
 
     private PhysicsBody pb;
     
-    [SerializeField] private Shot _focusedShot;
-    [SerializeField] private Shot _unfocusedshot;
+    [SerializeField] private Shot focusedShot;
+    [SerializeField] private Shot unfocusedshot;
     
     // properties
     public bool Focus
     {
-        get => _focused;
+        get => focused;
         set
         {
-            _focused = value;
-            if (_focused)
+            focused = value;
+            if (focused)
             {
                 speed = focusedSpeed;
             }
@@ -47,16 +47,17 @@ public class MovementController : MonoBehaviour
 
     public bool Shoot
     {
-        get => _isShooting;
-        set => _isShooting = value;
+        get => isShooting;
+        set => isShooting = value;
     }
 
     
     //methods
     void Start()
     {
-        if (_unfocusedshot == null) _unfocusedshot = GetComponent<Shot>();
-        if (_focusedShot == null) _focusedShot = GetComponent<Shot>();
+        // Shots should be set in spector, but if not find a Shot component.
+        if (unfocusedshot == null) unfocusedshot = GetComponent<Shot>();
+        if (focusedShot == null) focusedShot = GetComponent<Shot>();
 
         pb = GetComponent<PhysicsBody>();
 
@@ -69,15 +70,15 @@ public class MovementController : MonoBehaviour
         pb.MovePosition(moveVector * (speed * Time.deltaTime));
         
         // Shoot
-        if (_isShooting)
+        if (isShooting)
         {
-            if (_focused)
+            if (focused)
             {
-                _focusedShot.Shooting(ShootVector);
+                focusedShot.Shooting(ShootVector);
             }
             else
             {
-                _unfocusedshot.Shooting(ShootVector);
+                unfocusedshot.Shooting(ShootVector);
             }
         }
     }

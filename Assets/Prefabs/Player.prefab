@@ -220,8 +220,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   focusedSpeed: 3
   unfocusedSpeed: 6
-  _focusedShot: {fileID: 1137324780489271703}
-  _unfocusedshot: {fileID: 8671298017135610120}
+  focusedShot: {fileID: 1137324780489271703}
+  unfocusedshot: {fileID: 8671298017135610120}
 --- !u!114 &6347818688149481574
 MonoBehaviour:
   m_ObjectHideFlags: 0

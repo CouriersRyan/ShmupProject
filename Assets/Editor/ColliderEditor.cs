@@ -1,6 +1,9 @@
 using UnityEditor;
 using UnityEngine;
 
+/// <summary>
+/// Shows the circle collision of the physics body.
+/// </summary>
 [CustomEditor(typeof(PhysicsBody))]
 public class ColliderEditor : Editor
 {
