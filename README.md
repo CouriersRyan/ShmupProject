@@ -29,6 +29,11 @@ _A brief explanation of your game. Inculde what is the objective for the player.
 -   Fire: Left-Mouse-Click/Z
 -   Focus (Move slowly): Left-Shift
 
+### Enemies
+-   Standard Pidgeon - Shoots directly at the player.
+-   Wandered Pidgeon - Leaves a trail of wandering bullets along its path that wander around the screen for a short time.
+-   Streamed Pidgeon - Shoots a bunch of bullets at once. Shot in a way that's common to bullet hells and forces the player to employ a bullet hell concept called "streaming."
+
 ## You Additions
 
 _List out what you added to your game to make it different for you_\
