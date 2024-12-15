@@ -10,7 +10,7 @@ public class Enemy : Entity, IScorable
     // Enemy should spawn, follow a certain path, shoot at either regular intervals, or at a fixed spot, then leave.
     
     // fields
-    private Shot shot;
+    protected Shot shot;
     
     [SerializeField] private PhysicsBody pb;
     [SerializeField] private float speed = 2f;
@@ -41,7 +41,7 @@ public class Enemy : Entity, IScorable
         pb.DestroyRecycle -= OnDestroyRecycle;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         // shoot at the player and move as the basic behaviors
         shot.Shooting(PlayerController.Player.transform.position - transform.position);
@@ -62,7 +62,7 @@ public class Enemy : Entity, IScorable
     /// Return enemy to its pool when it is killed.
     /// </summary>
     /// <returns></returns>
-    public bool KillEnemy()
+    public virtual bool KillEnemy()
     {
         // update score for killing enemy
         ((IScorable)this).AddScore();

@@ -15,6 +15,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float spawnInterval;
     [SerializeField] private int maxSpawnCount = 20;
 
+    [SerializeField] private Boss boss;
+
     private const float Bounds = 8.5f;
     
     // methods
@@ -32,6 +34,8 @@ public class EnemyManager : MonoBehaviour
                 GameObjectPool.Create(enemy, 10, 30);
             }
         }
+
+        GameObjectPool.Create(boss, 1, 1);
         
         // Begin spawning enemies.
         StartCoroutine(SpawnEnemyOverTime());
@@ -63,6 +67,7 @@ public class EnemyManager : MonoBehaviour
 
         // A while after the last enemy spawns, end the game.
         yield return new WaitForSeconds(5.0f);
-        HUDManager.Instance.GameWin();
+        PoolableObject spawnedBoss = GameObjectPool.Pools[boss.poolID].Allocate();
+        spawnedBoss.transform.position = new Vector3(0, 5);
     }
 }

@@ -17,6 +17,10 @@ PrefabInstance:
       value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: -7148225334077978842, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
+      propertyPath: maxSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -7148225334077978842, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
       propertyPath: contactLayers.m_Bits
       value: 64
       objectReference: {fileID: 0}
@@ -129,7 +133,7 @@ MonoBehaviour:
   poolID: PlayerBulletHoming
   pb: {fileID: 1941578176577898120}
   boundsScalar: 2
-  speed: 30
+  speed: 20
   useLifespan: 0
   lifespan: 0
   currentLifespan: 0

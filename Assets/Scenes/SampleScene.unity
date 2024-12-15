@@ -1885,7 +1885,8 @@ MonoBehaviour:
   - {fileID: 1647606213667891086, guid: dcf96f7953881ab4683efcf33393e97e, type: 3}
   - {fileID: 8972764952323855570, guid: b8e35fa1ffa705449a9fcfa3899e13b0, type: 3}
   spawnInterval: 2
-  maxSpawnCount: 20
+  maxSpawnCount: 10
+  boss: {fileID: 3793968448985828461, guid: f7e7d84ecd0284c419b0b83649a6a7a2, type: 3}
 --- !u!4 &1392566038
 Transform:
   m_ObjectHideFlags: 0
