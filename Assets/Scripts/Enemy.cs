@@ -69,8 +69,8 @@ public class Enemy : Entity
     /// <param name="damage"></param>
     public override void DealDamage(int damage)
     {
-        currHealth -= damage;
-        if (currHealth <= 0)
+        Health -= damage;
+        if (Health <= 0)
         {
             pool.Recycle(this);
         }

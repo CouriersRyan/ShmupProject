@@ -1,8 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Pool;
 using UnityEngine;
+using UnityEngine.Serialization;
+
+public delegate void EntityHealthChangedHandler(int newHealth);
 
 /// <summary>
 /// An entity is anything that has HP among other stats
@@ -10,20 +10,36 @@ using UnityEngine;
 public abstract class Entity : PoolableObject, IHealth
 {
     // fields
-    [SerializeField] protected int health = 1;
-    [SerializeField] protected int currHealth;
+    [FormerlySerializedAs("health")] [SerializeField] protected int maxHealth = 1;
+    [SerializeField] private int currHealth;
 
-    public int Health { get => currHealth; }
+    public int Health
+    {
+        get => currHealth;
+        protected set
+        {
+            currHealth = value;
+            // Invoke health changed event.
+            if (OnEntityHealthChanged != null) OnEntityHealthChanged.Invoke(currHealth);
+        }
+    }
+
+    public int MaxHealth
+    {
+        get => maxHealth;
+    }
+
+    public event EntityHealthChangedHandler OnEntityHealthChanged;
     
     // methods
     protected virtual void Start()
     {
-        currHealth = health;
+        currHealth = maxHealth;
     }
     
     public override void OnRecycle()
     {
-        currHealth = health;
+        currHealth = maxHealth;
     }
     
     // abstract methods

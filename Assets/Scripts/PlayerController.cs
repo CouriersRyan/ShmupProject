@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -29,12 +30,15 @@ public class PlayerController : Entity
     }
     
     // methods
+    private void Awake()
+    {
+        // static reference to the player
+        Player = this;
+    }
+
     protected override void Start()
     {
         base.Start();
-
-        // static reference to the player
-        Player = this;
         
         _movementController = GetComponent<MovementController>();
         playerInput.SwitchCurrentActionMap("PlayableCharacter");
@@ -96,7 +100,7 @@ public class PlayerController : Entity
     {
         if (!isInvincible)
         {
-            currHealth--;
+            Health--;
             StartCoroutine(DamageGrace());
         }
     }
