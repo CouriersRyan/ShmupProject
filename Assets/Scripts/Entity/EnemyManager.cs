@@ -13,6 +13,7 @@ public class EnemyManager : MonoBehaviour
     // fields
     [SerializeField] private Enemy[] enemies;
     [SerializeField] private float spawnInterval;
+    [SerializeField] private int maxSpawnCount = 20;
 
     private const float Bounds = 8.5f;
     
@@ -34,11 +35,13 @@ public class EnemyManager : MonoBehaviour
         
         // Begin spawning enemies.
         StartCoroutine(SpawnEnemyOverTime());
+
+        HUDManager.Instance.OnGameOver += StopAllCoroutines;
     }
 
     private void OnDestroy()
     {
-
+        HUDManager.Instance.OnGameOver -= StopAllCoroutines;
         StopAllCoroutines();
     }
 
@@ -48,12 +51,18 @@ public class EnemyManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator SpawnEnemyOverTime()
     {
-        while (true)
+        int count = 0;
+        while (count < maxSpawnCount)
         {
             Enemy chosenEnemy = enemies[Random.Range(0, enemies.Length)];
             PoolableObject newEnemy = GameObjectPool.Pools[chosenEnemy.poolID].Allocate();
             newEnemy.transform.position = new Vector2(Random.Range(-Bounds, Bounds), 5);
+            count++;
             yield return new WaitForSeconds(spawnInterval);
         }
+
+        // A while after the last enemy spawns, end the game.
+        yield return new WaitForSeconds(5.0f);
+        HUDManager.Instance.GameWin();
     }
 }

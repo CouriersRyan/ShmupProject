@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Class representing a shmup enemy. Can spawn when on screen, shoot, move, and die.
 /// </summary>
-public class Enemy : Entity
+public class Enemy : Entity, IScorable
 {
     // Enemy should spawn, follow a certain path, shoot at either regular intervals, or at a fixed spot, then leave.
     
@@ -14,6 +14,10 @@ public class Enemy : Entity
     
     [SerializeField] private PhysicsBody pb;
     [SerializeField] private float speed = 2f;
+    [SerializeField] private int pointValue;
+    
+    //p properties
+    public int Score { get => pointValue; }
     
     // methods
     protected override void Start()
@@ -60,6 +64,8 @@ public class Enemy : Entity
     /// <returns></returns>
     public bool KillEnemy()
     {
+        // update score for killing enemy
+        ((IScorable)this).AddScore();
         return pool.Recycle(this);
     }
 
@@ -72,7 +78,7 @@ public class Enemy : Entity
         Health -= damage;
         if (Health <= 0)
         {
-            pool.Recycle(this);
+            KillEnemy();
         }
     }
 

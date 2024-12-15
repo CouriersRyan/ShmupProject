@@ -49,6 +49,11 @@ namespace Pool
             Init(initCount, maxCount);
         }
 
+        private void OnDestroy()
+        {
+            _pools = null;
+        }
+
         /// <summary>
         /// allocate an object from the queue of unused game objects.
         /// </summary>

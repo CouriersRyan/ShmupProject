@@ -101,10 +101,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pool: {fileID: 0}
   poolID: StandardEnemy
-  health: 1
+  maxHealth: 5
   currHealth: 0
   pb: {fileID: 2835010078283215081}
   speed: 2
+  pointValue: 100
 --- !u!114 &6098110230868180378
 MonoBehaviour:
   m_ObjectHideFlags: 0

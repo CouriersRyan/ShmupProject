@@ -1,7 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public delegate void GameOverHandler();
+public delegate void GameWinHandler();
 
 public class HUDManager : MonoBehaviour
 {
@@ -20,9 +22,25 @@ public class HUDManager : MonoBehaviour
         }
     }
 
+    [Header("HUD")]
     [SerializeField] private RectTransform[] lives;
     [SerializeField] private RectTransform lifePrefab;
     [SerializeField] private RectTransform livesContainer;
+    [SerializeField] private TMP_Text scoreText;
+    public int score = 0;
+
+    [Header("Game Over Screen")]
+    [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private TMP_Text gameOverScoreText;
+    
+    [Header("Game Win Screen")]
+    [SerializeField] private GameObject gameWinScreen;
+    [SerializeField] private TMP_Text gameWinScoreText;
+    [SerializeField] private TMP_Text gameWinLifeText;
+    [SerializeField] private TMP_Text gameWinFinalScoreText;
+
+    public event GameOverHandler OnGameOver;
+    public event GameWinHandler OnGameWin;
     
     private void Awake()
     {
@@ -33,7 +51,19 @@ public class HUDManager : MonoBehaviour
     void Start()
     {
         PlayerController.Player.OnEntityHealthChanged += UpdatePlayerHealthUI;
+        OnGameWin += DisplayGameWin;
+        OnGameWin += () => OnGameOver.Invoke();
         InitPlayerHealthUI();
+        score = 0;
+        UpdateScore(0);
+        gameOverScreen.SetActive(false);
+        gameWinScreen.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        PlayerController.Player.OnEntityHealthChanged -= UpdatePlayerHealthUI;
+        OnGameWin += DisplayGameWin;
     }
 
     private void UpdatePlayerHealthUI(int newHealth)
@@ -49,6 +79,12 @@ public class HUDManager : MonoBehaviour
                 lives[i].gameObject.SetActive(false);
             }
         }
+
+        if (newHealth < 0)
+        {
+            OnGameOver.Invoke();
+            DisplayGameOver();
+        }
     }
 
     private void InitPlayerHealthUI()
@@ -59,5 +95,35 @@ public class HUDManager : MonoBehaviour
             lives[i] = Instantiate(lifePrefab, livesContainer);
             lives[i].anchoredPosition = new Vector2(i * lifePrefab.rect.width, 0);
         }
+    }
+    
+    public void UpdateScore(int deltaScore)
+    {
+        score += deltaScore;
+        scoreText.text = score.ToString();
+    }
+
+    private void DisplayGameOver()
+    {
+        gameOverScreen.SetActive(true);
+        gameOverScoreText.text = "Score: " + score;
+    }
+
+    public void GameWin()
+    {
+        OnGameWin.Invoke();
+    }
+    
+    private void DisplayGameWin()
+    {
+        gameWinScreen.SetActive(true);
+        gameWinScoreText.text = "Level Score: " + score;
+        gameWinLifeText.text = "Life Bonus: " + PlayerController.Player.Health * 1000;
+        gameWinFinalScoreText.text = "Final Score: " + (score + PlayerController.Player.Health * 1000);
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(0);
     }
 }

@@ -44,6 +44,8 @@ public class PlayerController : Entity
         playerInput.SwitchCurrentActionMap("PlayableCharacter");
 
         _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        HUDManager.Instance.OnGameOver += () => gameObject.SetActive(false);
         
         // Bind Functions to Action Map
         _playerMove = playerInput.actions["Move"];
