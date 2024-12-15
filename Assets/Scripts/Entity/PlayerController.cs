@@ -103,7 +103,7 @@ public class PlayerController : Entity
         if (!isInvincible)
         {
             Health--;
-            StartCoroutine(DamageGrace());
+            if(gameObject.activeInHierarchy) StartCoroutine(DamageGrace());
         }
     }
 
