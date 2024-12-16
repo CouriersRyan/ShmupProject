@@ -10,23 +10,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1740114198357339038, guid: 70978497495aa4847bae2916b22650ce, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.4
+      value: 0.37060001
       objectReference: {fileID: 0}
     - target: {fileID: 1740114198357339038, guid: 70978497495aa4847bae2916b22650ce, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.4
+      value: 0.37060001
       objectReference: {fileID: 0}
     - target: {fileID: 1740114198357339038, guid: 70978497495aa4847bae2916b22650ce, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.4
+      value: 0.37060001
       objectReference: {fileID: 0}
     - target: {fileID: 1740114198357339038, guid: 70978497495aa4847bae2916b22650ce, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.8657722
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1740114198357339038, guid: 70978497495aa4847bae2916b22650ce, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5543058
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1740114198357339038, guid: 70978497495aa4847bae2916b22650ce, type: 3}
       propertyPath: m_LocalPosition.z
@@ -67,6 +67,10 @@ PrefabInstance:
     - target: {fileID: 5945533718163990204, guid: 70978497495aa4847bae2916b22650ce, type: 3}
       propertyPath: poolID
       value: EnemyBulletBig
+      objectReference: {fileID: 0}
+    - target: {fileID: 5950062160104237927, guid: 70978497495aa4847bae2916b22650ce, type: 3}
+      propertyPath: radius
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: 7623260958661126700, guid: 70978497495aa4847bae2916b22650ce, type: 3}
       propertyPath: m_Name

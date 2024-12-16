@@ -13,6 +13,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7148225334077978842, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
+      propertyPath: radius
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: -7148225334077978842, guid: af8cf004ce5cc1a43b4b062d4bc34721, type: 3}
       propertyPath: maxForce
       value: 1500
       objectReference: {fileID: 0}
