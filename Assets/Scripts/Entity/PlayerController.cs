@@ -45,6 +45,7 @@ public class PlayerController : Entity
 
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
+        // ensure player is disabled when game ends.
         HUDManager.Instance.OnGameOver += () => gameObject.SetActive(false);
         
         // Bind Functions to Action Map

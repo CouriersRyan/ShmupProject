@@ -1,3 +1,4 @@
+using Physics;
 using UnityEngine;
 
 /// <summary>
@@ -67,6 +68,7 @@ public class MovementController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // resolve movement
         pb.MovePosition(moveVector * (speed));
         
         // Shoot

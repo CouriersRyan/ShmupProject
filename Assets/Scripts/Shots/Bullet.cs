@@ -1,4 +1,5 @@
 using System;
+using Physics;
 using Pool;
 using UnityEngine;
 
@@ -77,12 +78,20 @@ public class Bullet : Agent
         }
     }
 
+    /// <summary>
+    /// Resetting that happens when pool recycles this object.
+    /// </summary>
     public override void OnRecycle()
     {
         currentLifespan = lifespan;
         owner = null;
     }
 
+    /// <summary>
+    /// Called when told to return this object to the pool.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void OnDestroyRecycle(object sender, EventArgs e)
     {
         pool.Recycle(this);

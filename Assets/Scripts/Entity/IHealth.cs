@@ -4,8 +4,9 @@
 public interface IHealth
 {
     public int Health { get; }
+    public int MaxHealth { get; }
+    
     public void DealDamage(int damage);
-
     public void DealDamage(DamageInfo damageInfo);
 }
 

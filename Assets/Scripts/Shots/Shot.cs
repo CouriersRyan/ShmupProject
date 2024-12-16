@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using Physics;
 using Pool;
 using UnityEngine;
 
@@ -61,11 +61,23 @@ public class Shot : MonoBehaviour, IShot
         }
     }
 
+    /// <summary>
+    /// Spawns the default bullet when a direction it is facing and a transform.
+    /// </summary>
+    /// <param name="dir"></param>
+    /// <param name="point"></param>
     protected void SpawnBullet(Vector2 dir, Transform point)
     {
         SpawnBullet(dir, bulletSpeed, point, bulletPool);
     }
 
+    /// <summary>
+    /// Resolves all bullet allocation and set up logic, such as setting a speed, and choosing what bullet to spawn.
+    /// </summary>
+    /// <param name="dir"></param>
+    /// <param name="speed"></param>
+    /// <param name="point"></param>
+    /// <param name="bPool"></param>
     protected void SpawnBullet(Vector2 dir, float speed, Transform point, GameObjectPool bPool)
     {
         // get new bullet from pool and set relevant values.

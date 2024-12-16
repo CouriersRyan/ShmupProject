@@ -1,4 +1,5 @@
 using System;
+using Physics;
 using Pool;
 using UnityEngine;
 
@@ -19,7 +20,7 @@ public class Enemy : Entity, IScorable
     [SerializeField] private float damagedTimerMax = 0.2f;
     private float damageTimer;
     
-    //p properties
+    // properties
     public int Score { get => pointValue; }
     
     // methods

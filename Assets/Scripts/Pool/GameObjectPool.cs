@@ -9,7 +9,7 @@ namespace Pool
     /// </summary>
     public class GameObjectPool : MonoBehaviour
     {
-        // field
+        // fields
         private static Dictionary<string, GameObjectPool> _pools;
         
         [SerializeField] private PoolableObject prefab;
@@ -182,6 +182,8 @@ namespace Pool
             return Create(prefab, 10, 200);
         }
 
+        // enums
+        
         /// <summary>
         /// Indicates whether the pool is properly initialized yet.
         /// </summary>

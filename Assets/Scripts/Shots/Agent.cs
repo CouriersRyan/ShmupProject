@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using Physics;
 using Pool;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.GraphicsBuffer;
 
 /// <summary>
 /// Class representing agents that steers forces based on a target.
@@ -36,11 +33,10 @@ public abstract class Agent : PoolableObject
     protected abstract void CalcSteeringForce();
 
     /// <summary>
-    /// Initialize steering Agent values.
+    /// Initialize steering Agent values if relevant.
     /// </summary>
     protected virtual void Init()
     {
-
     }
 
 

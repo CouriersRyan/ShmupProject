@@ -12,7 +12,10 @@ public abstract class Entity : PoolableObject, IHealth
     // fields
     [FormerlySerializedAs("health")] [SerializeField] protected int maxHealth = 1;
     [SerializeField] private int currHealth;
+    
+    public event EntityHealthChangedHandler OnEntityHealthChanged;
 
+    // properties
     public int Health
     {
         get => currHealth;
@@ -28,8 +31,6 @@ public abstract class Entity : PoolableObject, IHealth
     {
         get => maxHealth;
     }
-
-    public event EntityHealthChangedHandler OnEntityHealthChanged;
     
     // methods
     protected virtual void Start()
