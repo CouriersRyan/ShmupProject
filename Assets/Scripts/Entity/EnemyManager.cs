@@ -69,7 +69,7 @@ public class EnemyManager : MonoBehaviour
         // A while after the last enemy spawns, end the game.
         yield return new WaitForSeconds(5.0f);
         PoolableObject spawnedBoss = GameObjectPool.Pools[boss.poolID].Allocate();
-        spawnedBoss.transform.position = new Vector3(0, 5);
+        spawnedBoss.transform.position = new Vector3(0, 3.5f);
         StopCoroutine(SpawnEnemyOverTime());
     }
 }

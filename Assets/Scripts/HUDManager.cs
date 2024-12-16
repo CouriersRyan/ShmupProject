@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public delegate void GameOverHandler();
 public delegate void GameWinHandler();
@@ -23,6 +24,7 @@ public class HUDManager : MonoBehaviour
         }
     }
 
+    // fields
     [SerializeField] private bool endGame = false;
     
     [Header("HUD")]
@@ -42,9 +44,14 @@ public class HUDManager : MonoBehaviour
     [SerializeField] private TMP_Text gameWinLifeText;
     [SerializeField] private TMP_Text gameWinFinalScoreText;
 
+    [Header("Boss HP")]
+    [SerializeField] private GameObject bossHPContainer;
+    [SerializeField] private Slider bossHPBar;
+
     public event GameOverHandler OnGameOver;
     public event GameWinHandler OnGameWin;
     
+    // methods
     private void Awake()
     {
         instance = this;
@@ -61,6 +68,7 @@ public class HUDManager : MonoBehaviour
         UpdateScore(0);
         gameOverScreen.SetActive(false);
         gameWinScreen.SetActive(false);
+        bossHPContainer.SetActive(false);
     }
 
     private void Update()
@@ -113,6 +121,17 @@ public class HUDManager : MonoBehaviour
     {
         score += deltaScore;
         scoreText.text = score.ToString();
+    }
+    
+    public void DisplayBossHP()
+    {
+        bossHPContainer.SetActive(true);
+        bossHPBar.value = 1;
+    }
+
+    public void UpdateBossHP(float newValue)
+    {
+        bossHPBar.value = newValue;
     }
 
     private void DisplayGameOver()
