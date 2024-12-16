@@ -856,10 +856,10 @@ RectTransform:
   m_Father: {fileID: 744075800}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -490}
-  m_SizeDelta: {x: 0, y: -980}
-  m_Pivot: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &619667521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1132,6 +1132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 694e81bbfd0995d4f899d1021496e576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endGame: 0
   lives: []
   lifePrefab: {fileID: 2563232869617859334, guid: e5c024fa54d514f42a45c0d9ef6ec0a8, type: 3}
   livesContainer: {fileID: 619667520}

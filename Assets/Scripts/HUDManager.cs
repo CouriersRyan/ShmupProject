@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,6 +23,8 @@ public class HUDManager : MonoBehaviour
         }
     }
 
+    [SerializeField] private bool endGame = false;
+    
     [Header("HUD")]
     [SerializeField] private RectTransform[] lives;
     [SerializeField] private RectTransform lifePrefab;
@@ -58,6 +61,15 @@ public class HUDManager : MonoBehaviour
         UpdateScore(0);
         gameOverScreen.SetActive(false);
         gameWinScreen.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (endGame)
+        {
+            OnGameOver.Invoke();
+            DisplayGameOver();
+        }
     }
 
     private void OnDestroy()

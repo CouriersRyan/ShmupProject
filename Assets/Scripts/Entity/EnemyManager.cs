@@ -55,6 +55,7 @@ public class EnemyManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator SpawnEnemyOverTime()
     {
+        yield return new WaitForSeconds(0.1f);
         int count = 0;
         while (count < maxSpawnCount)
         {
@@ -69,5 +70,6 @@ public class EnemyManager : MonoBehaviour
         yield return new WaitForSeconds(5.0f);
         PoolableObject spawnedBoss = GameObjectPool.Pools[boss.poolID].Allocate();
         spawnedBoss.transform.position = new Vector3(0, 5);
+        StopCoroutine(SpawnEnemyOverTime());
     }
 }
