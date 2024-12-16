@@ -155,11 +155,12 @@ public class PhysicsBody : MonoBehaviour
         else if (type == PhysicsType.Kinematic)
         {
             // Update position with queued movement
-            transform.position += transform.rotation * movement;
+            transform.position += transform.rotation * (velocity);
             
             // face movement direction
             //transform.rotation = Quaternion.LookRotation(Vector3.forward, movement);
-        
+
+            velocity = Vector3.zero;
             movement = Vector3.zero;
         }
         
@@ -182,7 +183,7 @@ public class PhysicsBody : MonoBehaviour
     /// <param name="movement"></param>
     public void MovePosition(Vector3 movement)
     {
-        this.movement += movement;
+        this.velocity += movement * Time.deltaTime;
     }
     
     /// <summary>

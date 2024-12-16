@@ -43,7 +43,7 @@ public class Bullet : Agent
     protected override void CalcSteeringForce()
     {
         // don't use forces by default and move be a fixed amount
-        pb.MovePosition(Vector2.up * (speed * Time.deltaTime));
+        pb.MovePosition(Vector2.up * (speed));
     }
 
     protected override void Update()

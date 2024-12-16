@@ -67,7 +67,7 @@ public class MovementController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        pb.MovePosition(moveVector * (speed * Time.deltaTime));
+        pb.MovePosition(moveVector * (speed));
         
         // Shoot
         if (isShooting)

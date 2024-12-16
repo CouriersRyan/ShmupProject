@@ -37,6 +37,7 @@ public class Enemy : Entity, IScorable
         shot = GetComponent<Shot>();
         sr = GetComponent<SpriteRenderer>();
         pb.DestroyRecycle += OnDestroyRecycle;
+        pb.Collision += OnCollision;
         damageTimer = 0;
     }
     
@@ -44,13 +45,14 @@ public class Enemy : Entity, IScorable
     {
         // unsubscribe from events when destroyed.
         pb.DestroyRecycle -= OnDestroyRecycle;
+        pb.Collision -= OnCollision;
     }
 
     protected virtual void Update()
     {
         // shoot at the player and move as the basic behaviors
         shot.Shooting(PlayerController.Player.transform.position - transform.position);
-        pb.MovePosition(new Vector2(0, -speed * Time.deltaTime));
+        pb.MovePosition(new Vector2(0, -speed));
         
         // enemies turn red when hit and taking damage.
         if (damageTimer > 0)
@@ -96,6 +98,19 @@ public class Enemy : Entity, IScorable
         if (Health <= 0)
         {
             KillEnemy();
+        }
+    }
+    
+    /// <summary>
+    /// Resolves collisions against other PhysicsBodies.
+    /// </summary>
+    /// <param name="other"></param>
+    private void OnCollision(PhysicsBody other)
+    {
+        // If enemy collides with the player, deal damage to the player.
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<IHealth>().DealDamage(1);
         }
     }
 
