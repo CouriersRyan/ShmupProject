@@ -35,18 +35,9 @@ public class ShotStreamed : Shot
         triggered = true;
         for (int i = 0; i < maxCount; i++)
         {
-            var newBullet = bulletPool.Allocate();
-            newBullet.transform.position = transform.position;
-            var newBullet1 = (newBullet as Bullet);
-            newBullet1.Direction = direction;
-            newBullet1.speed = ((bulletSpeed - minBulletSpeed)/maxCount * i) + minBulletSpeed;
-            newBullet1.affiliation = affiliation;
-            newBullet1.owner = this;
-            float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-            Quaternion rotation = Quaternion.AngleAxis(angle, -Vector3.forward);
-            newBullet1.transform.rotation = rotation;
+            SpawnBullet(direction, ((bulletSpeed - minBulletSpeed)/maxCount * i) + minBulletSpeed, transform, bulletPool);
             
-            yield return new WaitForSeconds(1f/shotRate);
+            yield return new WaitForSeconds(shotInterval);
         }
         StopCoroutine(StreamedShooting());
     }

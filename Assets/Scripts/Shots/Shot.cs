@@ -20,12 +20,12 @@ public class Shot : MonoBehaviour, IShot
     public List<ShotMod> Mods { get; set; }
     
     protected GameObjectPool bulletPool;
-    [SerializeField] private float timer;
-    private float shotInterval;
+    [SerializeField] protected float timer;
+    protected float shotInterval;
     [SerializeField] private PhysicsBody pb;
 
     // methods
-    private void Start()
+    protected virtual void Start()
     {
         if (GameObjectPool.Pools.ContainsKey(bullet.poolID))
         {
@@ -56,25 +56,35 @@ public class Shot : MonoBehaviour, IShot
 
             foreach (var point in firePoints)
             {
-                // get new bullet from pool and set relevant values.
-                PoolableObject newBullet = bulletPool.Allocate();
-                newBullet.transform.position = point.position;
-                Bullet newBullet1 = (newBullet as Bullet);
-
-                float theta = point.rotation.eulerAngles.z * Mathf.Deg2Rad;
-                newBullet1.Direction = new Vector2(dir.x * Mathf.Cos(theta) - dir.y * Mathf.Sin(theta),
-                    dir.x * Mathf.Sin(theta) + dir.y * Mathf.Cos(theta));
-                
-                newBullet1.speed = bulletSpeed;
-                newBullet1.affiliation = affiliation;
-                newBullet1.owner = this;
-                float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
-                Quaternion rotation = Quaternion.AngleAxis(angle, -Vector3.forward);
-                newBullet1.transform.rotation = rotation;
+                SpawnBullet(dir, point);
             }
         }
     }
-    
+
+    protected void SpawnBullet(Vector2 dir, Transform point)
+    {
+        SpawnBullet(dir, bulletSpeed, point, bulletPool);
+    }
+
+    protected void SpawnBullet(Vector2 dir, float speed, Transform point, GameObjectPool bPool)
+    {
+        // get new bullet from pool and set relevant values.
+        PoolableObject newBullet = bPool.Allocate();
+        newBullet.transform.position = point.position;
+        Bullet newBullet1 = (newBullet as Bullet);
+
+        float theta = point.rotation.eulerAngles.z * Mathf.Deg2Rad;
+        newBullet1.Direction = new Vector2(dir.x * Mathf.Cos(theta) - dir.y * Mathf.Sin(theta),
+            dir.x * Mathf.Sin(theta) + dir.y * Mathf.Cos(theta));
+                
+        newBullet1.speed = speed;
+        newBullet1.affiliation = affiliation;
+        newBullet1.owner = this;
+        float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.AngleAxis(angle, -Vector3.forward);
+        newBullet1.transform.rotation = rotation;
+    }
+
     /// <summary>
     /// Called when poolable object needs to be recycled.
     /// </summary>

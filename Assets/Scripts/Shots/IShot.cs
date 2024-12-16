@@ -21,4 +21,11 @@ public interface IShot
     /// </summary>
     /// <param name="dir"></param>
     public void Shooting(Vector2 dir);
+
+    /// <summary>
+    /// Called when poolable object needs to be recycled.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    public void OnRecycle();
 }

@@ -13,8 +13,8 @@ public class Enemy : Entity, IScorable
     protected Shot shot;
     private SpriteRenderer sr;
     
-    [SerializeField] private PhysicsBody pb;
-    [SerializeField] private float speed = 2f;
+    [SerializeField] protected PhysicsBody pb;
+    [SerializeField] protected float speed = 2f;
     [SerializeField] private int pointValue;
     [SerializeField] private float damagedTimerMax = 0.2f;
     private float damageTimer;
@@ -112,7 +112,6 @@ public class Enemy : Entity, IScorable
     public override void OnRecycle()
     {
         // make sure the Shot is reset as well.
-        shot.OnRecycle();
         base.OnRecycle();
         damageTimer = 0;
     }
