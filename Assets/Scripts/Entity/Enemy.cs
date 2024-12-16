@@ -129,6 +129,7 @@ public class Enemy : Entity, IScorable
     {
         // make sure the Shot is reset as well.
         base.OnRecycle();
+        shot.OnRecycle();
         damageTimer = 0;
     }
 }
