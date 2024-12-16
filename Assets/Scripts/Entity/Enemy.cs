@@ -11,10 +11,13 @@ public class Enemy : Entity, IScorable
     
     // fields
     protected Shot shot;
+    private SpriteRenderer sr;
     
     [SerializeField] private PhysicsBody pb;
     [SerializeField] private float speed = 2f;
     [SerializeField] private int pointValue;
+    [SerializeField] private float damagedTimerMax = 0.2f;
+    private float damageTimer;
     
     //p properties
     public int Score { get => pointValue; }
@@ -32,7 +35,9 @@ public class Enemy : Entity, IScorable
     public void Init()
     {
         shot = GetComponent<Shot>();
+        sr = GetComponent<SpriteRenderer>();
         pb.DestroyRecycle += OnDestroyRecycle;
+        damageTimer = 0;
     }
     
     private void OnDestroy()
@@ -46,6 +51,17 @@ public class Enemy : Entity, IScorable
         // shoot at the player and move as the basic behaviors
         shot.Shooting(PlayerController.Player.transform.position - transform.position);
         pb.MovePosition(new Vector2(0, -speed * Time.deltaTime));
+        
+        // enemies turn red when hit and taking damage.
+        if (damageTimer > 0)
+        {
+            sr.color = Color.red;
+            damageTimer -= Time.deltaTime;
+        }
+        else
+        {
+            sr.color = Color.white;
+        }
     }
     
     /// <summary>
@@ -76,6 +92,7 @@ public class Enemy : Entity, IScorable
     public override void DealDamage(int damage)
     {
         Health -= damage;
+        damageTimer = damagedTimerMax;
         if (Health <= 0)
         {
             KillEnemy();
@@ -97,5 +114,6 @@ public class Enemy : Entity, IScorable
         // make sure the Shot is reset as well.
         shot.OnRecycle();
         base.OnRecycle();
+        damageTimer = 0;
     }
 }

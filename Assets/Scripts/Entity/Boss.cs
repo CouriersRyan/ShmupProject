@@ -1,5 +1,7 @@
 public class Boss : Enemy
 {
+    private const float Bounds = 8.5f;
+    
     protected override void Start()
     {
         base.Start();
