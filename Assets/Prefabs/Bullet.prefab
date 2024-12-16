@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 2852462600406271597}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalPosition: {x: 0, y: 0.01056, z: 0}
+  m_LocalScale: {x: 0.50316566, y: 0.50316566, z: 0.50316566}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,8 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: f247de71945eddd41aa3215b84959625, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.69803923}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -100,11 +100,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pool: {fileID: 0}
   poolID: PlayerBullet1
+  pb: {fileID: -7148225334077978842}
+  boundsScalar: 2
   speed: 20
-  dir: {x: 0, y: 0}
+  useLifespan: 0
+  lifespan: 0
+  currentLifespan: 0
   owner: {fileID: 0}
   affiliation: 0
-  pb: {fileID: -7148225334077978842}
+  target: {fileID: 0}
 --- !u!114 &-7148225334077978842
 MonoBehaviour:
   m_ObjectHideFlags: 0

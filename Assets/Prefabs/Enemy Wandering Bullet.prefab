@@ -57,6 +57,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5950062160104237927, guid: 70978497495aa4847bae2916b22650ce, type: 3}
+      propertyPath: radius
+      value: 0.075
+      objectReference: {fileID: 0}
+    - target: {fileID: 5950062160104237927, guid: 70978497495aa4847bae2916b22650ce, type: 3}
       propertyPath: maxForce
       value: 3
       objectReference: {fileID: 0}
@@ -75,7 +79,7 @@ PrefabInstance:
     - target: {fileID: 7852079774609453193, guid: 70978497495aa4847bae2916b22650ce, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+      objectReference: {fileID: 21300000, guid: 71969d3360b4a934ba2e619364c8a49d, type: 3}
     m_RemovedComponents:
     - {fileID: 5945533718163990204, guid: 70978497495aa4847bae2916b22650ce, type: 3}
     m_RemovedGameObjects: []
